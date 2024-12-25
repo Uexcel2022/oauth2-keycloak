@@ -17,6 +17,11 @@ spring:
 
   profiles:
     active: default
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${JWT_SET_URL:http://localhost:8180/realms/eazybankdev/protocol/openid-connect/certs}
 
 server:
   servlet:
@@ -35,3 +40,5 @@ logging:
     org:
       springframework:
         security: ${SPRING_SECURITY_LOG_LEVEL:trace}
+
+

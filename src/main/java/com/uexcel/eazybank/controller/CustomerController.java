@@ -19,7 +19,7 @@ public class CustomerController {
         ResponseDto rs = iCustomerService.addCustomer(createCustomerDto);
         return ResponseEntity.status(rs.getStatus()).body(rs);
     }
-    @GetMapping("fetch-customer")
+    @GetMapping("/fetch-customer")
     public ResponseEntity<CustomerResponseDto> getCustomerDetails(@RequestParam String mobileNumber) {
         CustomerResponseDto cRD = iCustomerService.getCustomerDetails(mobileNumber);
         return ResponseEntity.ok(cRD);

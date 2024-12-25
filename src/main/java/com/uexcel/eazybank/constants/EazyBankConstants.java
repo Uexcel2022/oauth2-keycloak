@@ -1,4 +1,4 @@
-package com.uexcel.eazybank;
+package com.uexcel.eazybank.constants;
 
 public class EazyBankConstants {
     public static String ADMIN = "ROLE_ADMIN";

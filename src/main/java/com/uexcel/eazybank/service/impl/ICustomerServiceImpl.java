@@ -11,6 +11,7 @@ import com.uexcel.eazybank.service.ICustomerService;
 import com.uexcel.eazybank.service.ILoanService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.password.CompromisedPasswordChecker;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,23 +25,15 @@ public class ICustomerServiceImpl implements ICustomerService {
     private final ICardService cardService;
     private final ILoanService loanService;
     private final CustomerMapper customerMapper;
-    private final PasswordEncoder passwordEncoder;
     private final CustomerRepository customerRepository;
 
-    private CompromisedPasswordChecker cPC;
     @Override
     public ResponseDto addCustomer(CreateCustomerDto createCustomerDto) {
-        if(cPC.check(createCustomerDto.getPwd()).isCompromised()){
-            throw new AppExceptionHandler(
-                    HttpStatus.BAD_REQUEST.value(),
-                    String.format("Password %s is considered compromised.", createCustomerDto.getPwd()));
-        }
-        String hashedPassword = passwordEncoder.encode(createCustomerDto.getPwd());
-        createCustomerDto.setPwd(hashedPassword);
-        Customer customer = customerRepository
-                .save(customerMapper.toCustomer(new Customer(), createCustomerDto));
 
-       if(customer.getId() > 0){
+//        Customer customer = customerRepository
+//                .save(customerMapper.toCustomer(new Customer(), createCustomerDto));
+
+       if(true){
            return new ResponseDto(HttpStatus.CREATED.value(),
                    HttpStatus.CREATED,"Customer registered successfully.");
        }
@@ -53,6 +46,7 @@ public class ICustomerServiceImpl implements ICustomerService {
      * @return - will hold customer consolidated info
      */
     @Override
+    @PreAuthorize("hasRole('USER')")
     public CustomerResponseDto getCustomerDetails(String mobileNumber) {
         Customer customer = customerRepository.findByMobileNumber(mobileNumber)
                 .orElseThrow(()-> new AppExceptionHandler(HttpStatus.NOT_FOUND.value(),

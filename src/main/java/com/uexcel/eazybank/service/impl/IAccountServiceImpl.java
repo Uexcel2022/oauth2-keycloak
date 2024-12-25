@@ -12,6 +12,7 @@ import com.uexcel.eazybank.persistence.CustomerRepository;
 import com.uexcel.eazybank.service.IAccountsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class IAccountServiceImpl implements IAccountsService {
     @Override
     public List<AccountsDto> fetchAccountsByCustomerIdOrAccountNumber(Long customerId, Long accountNumber) {
         List<AccountsDto> accountsDtoList = new ArrayList<>();
-        List<Accounts> accounts = null;
+        List<Accounts> accounts;
         if (customerId != null) {
         accounts = accountsRepository.findByCustomerId(customerId);
             if (accounts.isEmpty()) {
