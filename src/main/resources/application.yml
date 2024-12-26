@@ -26,7 +26,7 @@ spring:
 server:
   servlet:
     session:
-      timeout: ${SESSION_TIME0UT:2m}
+      timeout: ${SESSION_TIME0UT:10m}
 
 #  security:
 #    user:

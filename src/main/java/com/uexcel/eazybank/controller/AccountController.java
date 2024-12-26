@@ -25,12 +25,12 @@ public class AccountController {
     private final CustomerMapper customerMapper;
     @GetMapping("/myAccounts")
     public ResponseEntity<AccountsDto> getAccountDetails(@RequestParam(required = false) Long accountNumber,
-                                                         @RequestParam(required = false) String mobileNumber) {
+                                                         @RequestParam(required = false) String email) {
         AccountsDto accountsDto;
-        if (mobileNumber != null){
-           Customer customer = customerRepository.findByMobileNumber(mobileNumber)
+        if (email != null){
+           Customer customer = customerRepository.findByEmail(email)
                     .orElseThrow(()->new AppExceptionHandler(HttpStatus.NOT_FOUND.value(),
-                            "Customer not found with mobile number " + mobileNumber));
+                            "Customer not found with mobile number " + email));
             accountsDto =accountsService
                     .fetchAccountsByCustomerIdOrAccountNumber(customer.getId(), null).get(0);
             accountsDto.setCustomer(customerMapper.toDto(new CustomerResponseDto(),customer));

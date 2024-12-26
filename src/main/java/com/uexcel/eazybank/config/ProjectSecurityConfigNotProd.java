@@ -32,6 +32,7 @@ public class ProjectSecurityConfigNotProd {
                 .requestMatchers("/api/myAccounts","/api/myBalance").hasRole("USER")
                 .requestMatchers("/api/myLoans","/api/myCards").hasRole("USER")
                 .requestMatchers("/api/contact","/api/notices","/error").permitAll()
+                .requestMatchers("/api/add-notice","/api/update-notice").hasRole("ADMIN")
                 .anyRequest().authenticated());
         http.oauth2ResourceServer(rsc->rsc.jwt(jwtConfigurer -> jwtConfigurer
                 .jwtAuthenticationConverter(jwtAuthenticationConverter)));

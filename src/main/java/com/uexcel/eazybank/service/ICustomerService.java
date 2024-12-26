@@ -11,7 +11,7 @@ public interface ICustomerService {
 
     ResponseDto addCustomer(CreateCustomerDto createCustomerDto);
 
-    CustomerResponseDto getCustomerDetails(String mobileNumber);
+    CustomerResponseDto getCustomerDetails(String email);
 
     static String getTime(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

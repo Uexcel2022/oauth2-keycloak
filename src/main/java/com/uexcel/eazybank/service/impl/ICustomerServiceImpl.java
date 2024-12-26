@@ -9,12 +9,14 @@ import com.uexcel.eazybank.service.IAccountsService;
 import com.uexcel.eazybank.service.ICardService;
 import com.uexcel.eazybank.service.ICustomerService;
 import com.uexcel.eazybank.service.ILoanService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.password.CompromisedPasswordChecker;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
@@ -30,10 +32,21 @@ public class ICustomerServiceImpl implements ICustomerService {
     @Override
     public ResponseDto addCustomer(CreateCustomerDto createCustomerDto) {
 
-//        Customer customer = customerRepository
-//                .save(customerMapper.toCustomer(new Customer(), createCustomerDto));
+        if(customerRepository.existsByEmail(createCustomerDto.getEmail())) {
+            return new ResponseDto(HttpStatus.FOUND.value(),
+                    HttpStatus.FOUND,String.format("There is a customer with the email: %s",
+                    createCustomerDto.getEmail()));
+        }
+        if(customerRepository.existsByEmail(createCustomerDto.getEmail())) {
+            return new ResponseDto(HttpStatus.FOUND.value(),
+                    HttpStatus.FOUND,String.format("There is a customer with the phone number: %s",
+                    createCustomerDto.getMobileNumber()));
+        }
 
-       if(true){
+        Customer customer = customerRepository
+                .save(customerMapper.toCustomer(new Customer(), createCustomerDto));
+
+       if(customer.getId()>0){
            return new ResponseDto(HttpStatus.CREATED.value(),
                    HttpStatus.CREATED,"Customer registered successfully.");
        }
@@ -42,16 +55,16 @@ public class ICustomerServiceImpl implements ICustomerService {
     }
 
     /**
-     * @param mobileNumber
+     * @param email
      * @return - will hold customer consolidated info
      */
     @Override
     @PreAuthorize("hasRole('USER')")
-    public CustomerResponseDto getCustomerDetails(String mobileNumber) {
-        Customer customer = customerRepository.findByMobileNumber(mobileNumber)
+    public CustomerResponseDto getCustomerDetails(String email) {
+        Customer customer = customerRepository.findByEmail(email)
                 .orElseThrow(()-> new AppExceptionHandler(HttpStatus.NOT_FOUND.value(),
                                 String.format("Customer not found for the given " +
-                                        "input data mobileNumber: %s",mobileNumber)
+                                        "input data mobileNumber: %s",email)
                         )
                 );
         CustomerResponseDto customerResponseDto =

@@ -64,7 +64,6 @@ public class ICardServiceImpl implements ICardService {
         cDto.setName(customer.getName());
         cDto.setEmail(customer.getEmail());
         cDto.setMobileNumber(customer.getMobileNumber());
-        cDto.setRole(customer.getRole());
         cDto.setCreateDt(customer.getCreateDt());
         cardDto.setCustomer(cDto);
         return cardDto;

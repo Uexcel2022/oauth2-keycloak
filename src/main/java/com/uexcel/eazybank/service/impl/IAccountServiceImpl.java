@@ -56,7 +56,6 @@ public class IAccountServiceImpl implements IAccountsService {
             customerDto.setName(customer.getName());
             customerDto.setMobileNumber(customer.getMobileNumber());
             customerDto.setEmail(customer.getEmail());
-            customerDto.setRole(customer.getRole());
             customerDto.setCreateDt(customer.getCreateDt());
             ad.setCustomer(customerDto);
             accountsDtoList.add(ad);

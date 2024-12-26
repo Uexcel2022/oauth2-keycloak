@@ -19,8 +19,6 @@ public class Customer {
     private String name;
     private String mobileNumber;
     private String email;
-    private String pwd;
-    private String role;
     private LocalDate createDt;
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     @JsonIgnore
