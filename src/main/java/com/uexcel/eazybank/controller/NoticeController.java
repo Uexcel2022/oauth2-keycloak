@@ -2,7 +2,6 @@ package com.uexcel.eazybank.controller;
 
 import com.uexcel.eazybank.dto.ResponseDto;
 import com.uexcel.eazybank.model.Notice;
-import com.uexcel.eazybank.persistence.NoticeRepository;
 import com.uexcel.eazybank.service.INoticeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;

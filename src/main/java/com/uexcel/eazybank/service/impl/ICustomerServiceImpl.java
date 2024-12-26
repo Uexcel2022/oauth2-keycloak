@@ -37,7 +37,7 @@ public class ICustomerServiceImpl implements ICustomerService {
                     HttpStatus.FOUND,String.format("There is a customer with the email: %s",
                     createCustomerDto.getEmail()));
         }
-        if(customerRepository.existsByEmail(createCustomerDto.getEmail())) {
+        if(customerRepository.existsByMobileNumber(createCustomerDto.getMobileNumber())) {
             return new ResponseDto(HttpStatus.FOUND.value(),
                     HttpStatus.FOUND,String.format("There is a customer with the phone number: %s",
                     createCustomerDto.getMobileNumber()));

@@ -2,7 +2,6 @@ package com.uexcel.eazybank.controller;
 
 import com.uexcel.eazybank.dto.LoanDto;
 import com.uexcel.eazybank.dto.ResponseDto;
-import com.uexcel.eazybank.model.Loans;
 import com.uexcel.eazybank.service.ILoanService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
