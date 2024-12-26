@@ -28,9 +28,10 @@ public class ProjectSecurityConfigNotProd {
 
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/api/register").permitAll()
-                .requestMatchers("/api/fetch-customer").hasRole("USER")
-                .requestMatchers("/api/myAccounts","/api/myBalance").hasRole("USER")
-                .requestMatchers("/api/myLoans","/api/myCards").hasRole("USER")
+                .requestMatchers("/api/fetch-customer","/api/create-account").hasRole("USER")
+                .requestMatchers("/api/myAccounts","/api/myBalance",
+                        "/api/updateLoan","/api/add-transaction").hasRole("USER")
+                .requestMatchers("/api/myLoans","/api/myCards","/api/addLoan").hasRole("USER")
                 .requestMatchers("/api/contact","/api/notices","/error").permitAll()
                 .requestMatchers("/api/add-notice","/api/update-notice").hasRole("ADMIN")
                 .anyRequest().authenticated());
