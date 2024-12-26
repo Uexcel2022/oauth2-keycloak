@@ -30,11 +30,11 @@ public class AccountController {
                     .orElseThrow(()->new AppExceptionHandler(HttpStatus.NOT_FOUND.value(),
                             "Customer not found with mobile number " + email));
             accountsDto =accountsService
-                    .fetchAccountsByCustomerIdOrAccountNumber(customer.getId(), null).get(0);
+                    .fetchAccountsByCustomerIdOrAccountNumber(customer.getId(), null).getFirst();
             accountsDto.setCustomer(customerMapper.toDto(new CustomerResponseDto(),customer));
         } else {
             accountsDto = accountsService
-                    .fetchAccountsByCustomerIdOrAccountNumber(null, accountNumber).get(0);
+                    .fetchAccountsByCustomerIdOrAccountNumber(null, accountNumber).getFirst();
         }
         return ResponseEntity.ok(accountsDto);
     }

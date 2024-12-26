@@ -51,7 +51,7 @@ public class ICustomerServiceImpl implements ICustomerService {
     }
 
     /**
-     * @param email
+     * @param email - email
      * @return - will hold customer consolidated info
      */
     @Override

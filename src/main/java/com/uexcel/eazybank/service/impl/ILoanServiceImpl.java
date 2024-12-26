@@ -23,8 +23,8 @@ public class ILoanServiceImpl implements ILoanService {
     private final AccountsRepository accountsRepository;
     private final LoanMapper loanMapper;
     /**
-     * @param accountNumber
-     * @return
+     * @param accountNumber - account
+     * @return - loan details
      */
     @Override
     public List<LoanDto> fetchLoanByAccountNumber(Long accountNumber) {

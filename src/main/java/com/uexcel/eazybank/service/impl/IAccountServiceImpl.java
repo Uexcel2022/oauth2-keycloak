@@ -25,7 +25,7 @@ public class IAccountServiceImpl implements IAccountsService {
     private final CustomerRepository customerRepository;
 
     /**
-     * @param customerId
+     * @param customerId - accountId
      * @return - card information using CardDto
      */
     @Override
@@ -48,8 +48,8 @@ public class IAccountServiceImpl implements IAccountsService {
                                 "input data accountNumber: %s",accountNumber)
                 );
             }
-            AccountsDto ad = accountsMapper.mapToDto(accounts.get(0), new AccountsDto());
-            Customer customer = accounts.get(0).getCustomer();
+            AccountsDto ad = accountsMapper.mapToDto(accounts.getFirst(), new AccountsDto());
+            Customer customer = accounts.getFirst().getCustomer();
             CustomerDto customerDto = new CustomerDto();
             customerDto.setId(customer.getId());
             customerDto.setName(customer.getName());
@@ -70,9 +70,7 @@ public class IAccountServiceImpl implements IAccountsService {
     @Override
     public ResponseDto createAccount(AccountsDto accountsDto) {
         if(accountsDto == null){
-            throw new AppExceptionHandler(HttpStatus.BAD_REQUEST.value(),
-                    String.format("Input data is null")
-            );
+            throw new AppExceptionHandler(HttpStatus.BAD_REQUEST.value(), "Input data is null");
         }
         String mobileNumber = accountsDto.getCustomer().getMobileNumber();
         Customer customer = customerRepository.findByMobileNumber(mobileNumber)
@@ -83,11 +81,8 @@ public class IAccountServiceImpl implements IAccountsService {
 
         Accounts accounts = accountsMapper.toAccount(new Accounts(),accountsDto);
         accounts.setCustomer(customer);
-         Accounts savedAccount = accountsRepository.save(accounts);
-         if(savedAccount != null){
+         accountsRepository.save(accounts);
              return new ResponseDto(HttpStatus.CREATED.value(),
                      HttpStatus.CREATED,"Account created successfully");
-         }
-        throw new AppExceptionHandler(HttpStatus.EXPECTATION_FAILED.value(),"Account creation failed");
     }
 }
