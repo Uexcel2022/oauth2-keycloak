@@ -9,14 +9,10 @@ import com.uexcel.eazybank.service.IAccountsService;
 import com.uexcel.eazybank.service.ICardService;
 import com.uexcel.eazybank.service.ICustomerService;
 import com.uexcel.eazybank.service.ILoanService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.password.CompromisedPasswordChecker;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 

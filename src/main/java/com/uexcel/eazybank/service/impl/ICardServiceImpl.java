@@ -4,11 +4,9 @@ import com.uexcel.eazybank.dto.CardsDto;
 import com.uexcel.eazybank.dto.CustomerDto;
 import com.uexcel.eazybank.exceptionhandling.AppExceptionHandler;
 import com.uexcel.eazybank.mapper.CardsMapper;
-import com.uexcel.eazybank.mapper.CustomerMapper;
 import com.uexcel.eazybank.model.Cards;
 import com.uexcel.eazybank.model.Customer;
 import com.uexcel.eazybank.persistence.CardRepository;
-import com.uexcel.eazybank.persistence.CustomerRepository;
 import com.uexcel.eazybank.service.ICardService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,8 +20,6 @@ import java.util.List;
 public class ICardServiceImpl implements ICardService {
     private final CardRepository cardRepository;
     private final CardsMapper cardsMapper;
-    private final CustomerRepository customerRepository;
-    private final CustomerMapper customerMapper;
     /**
      * @param accountNumber
      * @return

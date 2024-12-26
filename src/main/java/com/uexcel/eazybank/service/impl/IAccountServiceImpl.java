@@ -12,7 +12,6 @@ import com.uexcel.eazybank.persistence.CustomerRepository;
 import com.uexcel.eazybank.service.IAccountsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
