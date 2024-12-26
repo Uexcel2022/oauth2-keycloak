@@ -21,6 +21,7 @@ public class BalanceController {
         List<AccountTransactions> tr = iATService.getAccountTransaction(accountNumber);
         return ResponseEntity.ok(tr);
     }
+
     @PostMapping("/add-transaction")
     public ResponseEntity<ResponseDto> addTransaction(
             @RequestBody AccountTransactionDto transactionDto) {
