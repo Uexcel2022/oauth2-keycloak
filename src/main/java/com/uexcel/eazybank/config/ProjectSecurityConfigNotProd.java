@@ -1,6 +1,6 @@
 package com.uexcel.eazybank.config;
 
-import com.uexcel.eazybank.converter.KeyCloakConverter;
+import com.uexcel.eazybank.converter.KeyCloakRoleConverter;
 import com.uexcel.eazybank.exceptionhandling.CustomAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ public class ProjectSecurityConfigNotProd {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeyCloakConverter());
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeyCloakRoleConverter());
 
         http.requiresChannel(rcc-> rcc.anyRequest().requiresInsecure());
 
