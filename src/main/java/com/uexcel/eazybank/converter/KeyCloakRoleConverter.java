@@ -27,4 +27,5 @@ public class KeyCloakRoleConverter implements Converter<Jwt, Collection<GrantedA
 
         return returnedValues;
     }
+
 }
